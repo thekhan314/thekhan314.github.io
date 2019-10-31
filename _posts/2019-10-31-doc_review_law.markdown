@@ -1,11 +1,10 @@
 ---
 layout: post
-title:      "Doc. ReviewLaw "
+title:      "Doc. ReviewLaw (or: How I learned to stop worrying and love the Data)"
 date:       2019-10-31 13:05:07 -0400
 permalink:  doc_review_law
 ---
 
-# *(or: How I learned to stop worrying and love the Data)*
 I am, among other things, a lawyer. 
 
 I'm still not exactly sure how I wound up being a lawyer. I had always been fascinated with computers from as far back as I can remember. I published my first website at 12 and started messing around with my sister’s college c++ textbook. But it was decided that I was to become a mechanical engineer. So in O Levels (i.e. high school) I ended up taking all science and advanced math courses. I did well enough in those, but I craved exposure to the humanities so much by that point that in college I abruptly switched to studying things like philosophy and political science. Fast forward to graduation: what do I do now? Law school seemed like the best bet. Another three years and a mountain of debt later I stood initiated into the ranks of those warriors of justice holding up the very foundations of civilization as we know it. 
