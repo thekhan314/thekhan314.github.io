@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Doc. Review Law "
-date:       2019-10-31 17:05:07 +0000
+date:       2019-10-31 13:05:07 -0400
 permalink:  doc_review_law
 ---
 
