@@ -1,11 +1,10 @@
 ---
 layout: post
-title:      "Doc. Review Law (or: How I learned to stop worrying and love the Data)"
+title:      "Doc. Review Law (or: How I learned to stop worrying and love the Data)# "
 date:       2019-10-31 13:05:07 -0400
 permalink:  doc_review_law
 ---
 
-# 
 
 I am, among other things, a lawyer. 
 
