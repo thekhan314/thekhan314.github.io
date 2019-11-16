@@ -22,7 +22,7 @@ Digital Ocean allows you to get a 'droplet', which is what they call their virtu
 
 Head on over to digitalocean.com and create an account. It will ask you to create your first project. Creating a project has no cost associated with it, projects are just used to organize your droplets and you need to have at least one project. The next screen will take you to the dashboard for your project. Click the green 'Create' button on the top right and choose 'Droplet' from the menu.  Digital Ocean has a [guide](https://www.digitalocean.com/docs/droplets/how-to/create/) on how to create a droplet, but ill walk you through it. 
 
-On the Create Droplet page, for Distribution, keep the default Ubuntu selection, and go for the standard plan. Below that you will see the mothly plan options; pick whichever one you like (scroll left for the lower priced ones). You can add block storage if you want, its not required. Choose a data center region thats relatively closest to you. Leave the "additional options" blank. For authentication, you cam choose ssh keys if you want and if your familiar with how those work. For this tutorial I recommend you go with 'one time password' and I'll show you how to set up ssh keys later (maybe lol). Only one droplet under "How many Dropets", ofcourse. 
+On the Create Droplet page, for Distribution, keep the default Ubuntu selection, and go for the standard plan. Below that you will see the mothly plan options; pick whichever one you like (scroll left for the lower priced ones). You can add block storage if you want, its not required. Choose a data center region thats relatively closest to you. Leave the "additional options" blank. For authentication, you can choose ssh keys if you want and if you're familiar with how those work. For this tutorial I recommend you go with 'one time password' and I'll show you how to set up ssh keys later (maybe lol). Only one droplet under "How many Dropets", ofcourse. 
 
 In "choose a hostname", enter any name you like for your soon to be created baby server! You can enable backups if you like, its a dollar extra. After that, just click the big green "Create Droplet" button and Voila!! You are now the proud owner of a virtual server! In a few minutes you will get an e-mail with the password and ip address of your new server. Once you have those, we will be diving into the command line to access your new server and set it up. 
 
@@ -76,7 +76,7 @@ Awesome! Lets move on to setting up Anaconda and all our Python packages, includ
 
 # 3. Installing Anaconda (and thus, Jupyter)
 
-You'd think you'd be able to use apt-get to install Anaconda, right?  Unfortunately thats not the case.  Here's a [video]https://youtu.be/jo4RMiM-ihs) I found of a method that actually works. As usual, I'll walk you through as well, partly as this video doesnt tell you how to get the link itself. 
+You'd think you'd be able to use apt-get to install Anaconda, right?  Unfortunately thats not the case.  Here's a [video](https://youtu.be/jo4RMiM-ihs) I found of a method that actually works. As usual, I'll walk you through as well, partly as this video doesnt tell you how to get the link itself. 
 
 Head on over to Anaconda.com and hit Download. At the top, switch to the Linux option and make sure you are looking at the Linux installer downloads. Right click on the Python 3.7 version Download button and click 'copy link address'. Now head over to your terminal, which should be ssh'd into your server. Make a new folder and cd into it ( you do know how to do that, right?). Then, run the following command:
 
@@ -84,7 +84,7 @@ Head on over to Anaconda.com and hit Download. At the top, switch to the Linux o
 
 This will download the Anaconda bash script to the new folder we made. To run it, type:
 
-`sudo bash [name of the downloaded file ( start typing Anaconda then hit tab should work)]`
+`sudo bash [name of the downloaded file ( start typing Anaconda then hit tab that should work)]`
 
 Hit yes and more and yes etc etc. Just let it do its thing.  Might take a minute. 
 
@@ -94,7 +94,7 @@ I'd do a reboot of the server at this point.
 
 `sudo reboot`
 
-When you ssh back in, make sure to switch to your root user!
+Wait a couple of minutes and then ssh back in to your server. Instead of root@168.167.34.187.34 you can ssh directly to the user account you created by entering user@168.167.34.187.34. Either way, when you get back into your server make sure you are in the user account. 
 
 # 4. Configure Jupyter
 
@@ -108,7 +108,7 @@ This will generate a configuration file which we will have to modify and edit. W
 
 `sudo nano [path to config file]`
 
-Now go ahead and find following four lines in the file, changing them to match what Im showing here, and uncommenting them so they take effect(i.e. delet the hash(#) marks before the start of the line). In nano, you can go to a line by searching for it using CTRL + W (or whatever the mac equivalent is).
+Now go ahead and find following four lines in the file, changing them to match what Im showing here, and uncommenting them so they take effect(i.e. delete the hash(#) marks before the start of the line). In nano, you can go to a line by searching for it using CTRL + W (or whatever the mac equivalent is).
 
 ```
 c.NotebookApp.open_browser = False
@@ -117,13 +117,13 @@ c.NotebookApp.password = ' '
 c.NotebookApp.token = ' '
 ```
 
-To be clear, password and token are to be left blank. There is nothing between the single quotes so make sure there isnt a space there. If your gonna copy paste the lines above make sure you take the space out. I just put it there to make it clear it wasnt a single double quote. This is only if you just want to take the shortest path to getting Jupyter to work remotely and dont care about security. 
+To be clear, password and token are to be left blank. There is nothing between the single quotes so make sure there isnt a space there. If you'rer gonna copy paste the lines above make sure you take the space out. I just put it there to make it clear it wasnt a single double quote. This is only if you just want to take the shortest path to getting Jupyter to work remotely and dont care about security. 
 
 However, you CAN set passwords for Jupyter notebooks. And you probably should. Otherwise anyone can open your notebooks and delete all your data. Some sick people out there. Just sayin'
 
 So far, I've shown you the steps to just get it to work. But to add a password, we will do a couple of things differently. 
 
-First of all, in the config file, instead of setting the value of c.NotebookApp.token, leave it at the default value ( usually '<generated>').  If you want, you can run the jupyter notebook --generate-config file and hit 'yes', this will basically reset the config file to its original state (And you just have to redo the other three lines we described above). 
+First of all, in the config file, instead of setting the value of c.NotebookApp.token, leave it at the default value ( usually '<generated>').  If you want, you can run the jupyter notebook --generate-config file command again and hit 'yes', this will basically reset the config file to its original state (And you just have to redo the other three lines we described above). 
 
 Once you have done that, go back to your command line and run the following command:
 
@@ -164,7 +164,9 @@ You would have to do this for all the ip addresses of the devices you want to be
 
 # 6. And now.....Jupyter!
 
-Launch time! cd into any folder other than your root folder. I like to cd to a folder where I house all the repositories for my Jupyter projects and labs. Once here, run the following command
+Launch time! 
+
+cd into any folder other than your root folder. I like to cd to a folder where I house all the repositories for my Jupyter projects and labs. Once here, run the following command
 
 `nohup jupyter notebook &`
 
