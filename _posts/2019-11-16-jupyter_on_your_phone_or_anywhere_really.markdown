@@ -33,13 +33,19 @@ The e-mail from digital ocean will have the following information:
 * The IP address for the droplet
 * The password for the droplet. 
 
+For the purposes of this tutorial, lets assume your IP address is: 
+
+`168.167.34.187.34`
+
+Ofocurse your IP will be different. Wherever you see the above IP in this tutorial, replace it with your own. 
+
 We will be using ssh to connect to the server. SSH is a command line utility that creates secure connections between machines. Head on over to a command line terminal. If your on windows, you have  a few options. The easiest is git bash, which works just fine. Download the [git package](https://gitforwindows.org/) for windows from . Alternatively, you can enable the linux subsystem for windows and [install Ubuntu](https://docs.microsoft.com/en-us/windows/wsl/install-win10) natively on your machine. The most annoying way is to use PuTTY, which I wont go into. If you're on a mac...well I hear macs have a terminal built in so....
 
 Once your at your command line, you will enter
 
-`ssh root@[ip address for your machine].`
+`ssh root@168.167.34.187.34`
 
-You will be prompted for root@[droplet's ip] 's password. Type out or paste the password you were e-mailed. Remember that when you type or paste text into password prompts in the command line, it doesnt actually display any text and the cursor stays the same. 
+You will be prompted for root@168.167.34.187.34 's password. Type out or paste the password you were e-mailed. Remember that when you type or paste text into password prompts in the command line, it doesnt actually display any text and the cursor stays the same. 
 
 Congratulations!! you are now in your server. The very first thing that should be done when you access a fresh new virtual server is to do some updates. 
 
@@ -164,19 +170,16 @@ Launch time! cd into any folder other than your root folder. I like to cd to a f
 
 This will start jupyter running in the background and give you back your command line. 
 
-Now open your web browser and navigate to:
+Now open your web browser and navigate to your Jupyter server by typing the following in the URL bar:
 
-[your servers ip address]:8888. 
+`167.34.187.34:8888`
 
-Remember, your servers IP address was e-mailed to you when you created the droplet. So the url you go to would look something like :        
-
-167.34.187.34:8888
+You can also actually set a domain name to forward to your server, so that instead of typing in your ip address you can just go to www.dataperson.com:8888 or whatever. This is something you do through your server hosting company. If you used Digital Ocean, go to your project dashboard, and hit the three dot menu next to your droplet's name and click "Add a Domain". I'm sure you can figure out the rest yourself ;)
 
 If you set the password like I outlined above, you will see a login page asking your for a password or token. Simply enter that password, and voila! you should see Jupyter running before your eyes. 
 
-You can basically browse to the address I described above from any browser.  You can also actually set a domain name to forward to your server, so that instead of typing in your ip address you can just go to www.dataperson.com:8888 or whatever. This is something you do through your server hosting company. If you used Digital Ocean, go to your project dashboard, and hit the three dot menu next to your droplet's name and click "Add a Domain". I'm sure you can figure out the rest yourself ;)
-
-You are now set to Jupyter everywhere.
+You are now set to Jupyter everywhere. Navigate to your server's address from any browser and you're good to go.  
+The possibilites are endless. 
 
 Happy coding!
 
