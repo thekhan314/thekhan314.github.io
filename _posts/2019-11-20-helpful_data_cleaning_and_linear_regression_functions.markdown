@@ -8,6 +8,11 @@ permalink:  helpful_data_cleaning_and_linear_regression_functions
 
 While working on my Module 1 project, the King County Linear Regression project, I wrote some functions to automate and simplify certain tasks. I thought these might be useful to me in the future, and maybe even to other people. In this post I'll walk through some of them. 
 
+The github repository containing the original notebook for the project, showing the application of these functions to the King County dataset can be found at:
+
+https://github.com/thekhan314/khan_mod1project_kingcounty
+
+
 ## Value Counts Report
 The first one is a dataframe reporting function I wrote that helps us analyze the unique values and their counts in each column of the dataframe. You pass in a dataframe and a number 'n'. It will list the first, second...nth most common value in each column, as well as the percentage of the columns values that it comprises. In this way, you can immediately see if a column has a large number of a certain value, and then explore further to see if maybe its a placeholder or otherwise erroneous. It also lists the percent of missing values and the datatype of the column, just to have that info in one handy place. 
 
