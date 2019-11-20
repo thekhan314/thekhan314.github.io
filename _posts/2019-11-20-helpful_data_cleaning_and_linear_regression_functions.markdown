@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Helpful Data Cleaning and Linear Regression Functions"
-date:       2019-11-20 07:44:10 +0000
+date:       2019-11-20 02:44:11 -0500
 permalink:  helpful_data_cleaning_and_linear_regression_functions
 ---
 
@@ -46,6 +46,43 @@ def report1 (dataframe,n_highest_counts):
 The following are functions that help with different parts of the pre-processing workflow. Some of them are fairly simple. But at the end, there is a master pre-processing function that calls on each of these. This master function takes in a dictionary tht contains the arguments to be passed into each of the sub-functions. In this way, we can quickly reprocess our data according to different specifications by simply modifying the dictionary and passing it into the master function. I define the dictionary at the outset, then add lists of columns to it as I go. It's kind of like an API. 
 
 `processing_dict = {}`
+
+Bear in mind that the dictionary we pass it into must confirm to the template below. It must have the same key names, and the values must be either lists of dictionaries as seen here. 
+
+```
+{   'categ_cols': ['zipcode', 'waterfront'],
+    'categ_culled': {'bathrooms': 6, 'bedrooms': 15},
+    'colinear_columns': ['sqft_above', 'sqft_lot15'],
+    'cols_normed': [   'sqft_above',
+                       'sqft_living15',
+                       'sqft_lot',
+                       'sqft_lot15',
+                       'sqft_living',
+                       'price',
+                       'price',
+                       'price'],
+    'contin_cull': [   'sqft_lot15',
+                       'price',
+                       'sqft_lot',
+                       'sqft_living15',
+                       'bedrooms'],
+    'contin_cull_thresh': 0.97,
+    'scaled_cols': [   'bedrooms',
+                       'bathrooms',
+                       'sqft_living',
+                       'sqft_lot',
+                       'floors',
+                       'waterfront',
+                       'view',
+                       'condition',
+                       'grade',
+                       'sqft_basement',
+                       'yr_built',
+                       'lat',
+                       'long',
+                       'sqft_living15',
+                       ]}
+```
 
 ### Outlier Removal 
 
@@ -205,43 +242,90 @@ def pre_process (dataframe,dictionary):
     return dataframe
 ```
 
+## Functions for working with Linear Regression in StatsModels
+### Removing features with high p-values
 
-Bear in mind that the dictionary we pass it into must confirm to the template below:
+You know how you fit a model and then you see that some features have high p-values? This function will help you take out those features from the original dataframe so you can refit your model. 
 
 ```
-{   'categ_cols': ['zipcode', 'waterfront'],
-    'categ_culled': {'bathrooms': 6, 'bedrooms': 15},
-    'colinear_columns': ['sqft_above', 'sqft_lot15'],
-    'cols_normed': [   'sqft_above',
-                       'sqft_living15',
-                       'sqft_lot',
-                       'sqft_lot15',
-                       'sqft_living',
-                       'price',
-                       'price',
-                       'price'],
-    'contin_cull': [   'sqft_lot15',
-                       'price',
-                       'sqft_lot',
-                       'sqft_living15',
-                       'bedrooms'],
-    'contin_cull_thresh': 0.97,
-    'scaled_cols': [   'bedrooms',
-                       'bathrooms',
-                       'sqft_living',
-                       'sqft_lot',
-                       'floors',
-                       'waterfront',
-                       'view',
-                       'condition',
-                       'grade',
-                       'sqft_basement',
-                       'yr_built',
-                       'lat',
-                       'long',
-                       'sqft_living15',
-                       ]}
+def remove_pvals (model,dataframe):
+    ''' Removes columns representing features with high p-values'''
+    pvalues = round(model.pvalues,4)
+    pvalues = pvalues.drop('const')
+    high_pvalues = pvalues[pvalues > 0.05]    
+    high_list = list(high_pvalues.index)
+
+    dataframe = dataframe.drop(high_list,axis=1)
+    
+    return dataframe 
 ```
+
+### Model Validation and Metrics. 
+
+StatsMod gives you a decent enough report when you fit a Linear Regression model. But tahts only for one set of predictor and target variables. Typically, we want to use train test split to test this model on values it hasnt seen before. Not only that, we want to pull multiple training and test sets to smooth out the effects of randomly selecting test values. 
+
+To that end, the function below takes dataframes of predictors and variables, splits them into training and tests sets of the size specified in the input arguments for 25 iterations, fits a model and gathers r2, RMSE and the proportion of the mean that the magnitude of the RMSE represents. The idea behind this last number was to have a more portable metric to allow me to compare the performance of models where the target variable is on different scales. I know theres a more widely accepted metric, [Mean Absolute Percentage Error(MAPE)](https://hackernoon.com/how-to-measure-the-accuracy-of-a-predictive-model-or-algorithm-part-1-6a6c00c38687). I was having trouble implementing it. If you can figure out why, please do let me know!
+
+```
+def mse_validation (predictors,target,size):
+    collection = []
+              
+    errorlist = []
+
+    for j in range(1,25):
+
+        x_train,x_test,y_train,y_test= train_test_split(predictors,target,test_size=size)
+
+        x_train_int= sm.add_constant(x_train)
+
+        x_test_int= sm.add_constant(x_test)
+
+        olsmod = sm.OLS(y_train,x_train_int).fit()
+
+        y_train_hat = olsmod.predict(x_train_int)
+
+        y_test_hat = olsmod.predict(x_test_int)
+
+        train_mse = np.sum((y_train - y_train_hat)**2/len(y_train))
+
+        test_mse = np.sum((y_test - y_test_hat)**2/len(y_test))
+        
+        train_r2 = olsmod.rsquared
+        
+        train_rmse = sqrt(train_mse)
+        
+        test_rmse = sqrt(test_mse)
+        
+        #train_mape = (abs(y_train - y_train_hat)/abs(y_train))*100
+        
+        #test_mape = (abs(y_test - y_train_hat)/abs(y_test))*100
+
+        errorlist.append([train_mse,test_mse,train_r2,train_rmse,test_rmse]) #,train_mape,test_mape])
+
+    saveframe = pd.DataFrame(errorlist,columns=['train','test','r2','train_rmse','test_rmse']) # ,'train_mape','test_mape'
+    
+    report_dict = {}
+    
+    report_dict['train_mean_squared_error'] = saveframe['train'].mean()
+    report_dict['test_mean_squared_error'] = saveframe['test'].mean()
+    report_dict['train_rmse'] = saveframe['train_rmse'].mean()
+    report_dict['test_rmse'] = saveframe['test_rmse'].mean()
+    #report_dict['train_mape'] = saveframe['train_mape'].mean()
+    #report_dict['test_mape'] = saveframe['test_mape'].mean()
+    report_dict['train_mean_vs_error'] = (saveframe['train_rmse'].mean()/target.mean())*100
+    report_dict['test_mean_vs_error'] = (saveframe['test_rmse'].mean()/target.mean())*100
+    report_dict['mean_r2'] = round(saveframe['r2'].mean(),2)
+    
+    
+    report_frame = pd.DataFrame.from_dict(report_dict,orient='index',columns=['Scores'])  
+    
+    return report_frame
+```
+
+
+
+
+
 
 
 
