@@ -29,12 +29,12 @@ Why do we do this? Lets look at some actual examples.
 
 The median price like we said was 450,000. The natural log of this is roughly 13.02, which is to say that we can calculate the mean price of a house by raising 2.718 to 13.02. i.e:
 
-             13.02
+		        13.02
 2.718           = 540,000
 
 Now lets get the natural log of the most expensive house. This turns out to be: 15.85 i.e
 
-              15.85
+				     15.85
 3.2.718           = 7,700,000
 
 You see what happened? Even though the maximum price is almost 14 times higher than the median price, however, the logarithm is only higher by 2 points!
@@ -82,17 +82,15 @@ y = e
                     x
 is also    e    .
 
-This makes calculations involving the derivative much simpler, which is why it is favored as a base for logarithmic functions. 
-
-E will also come up in the study of statistics, specifically in Bernoulli trial processes (go figure). 
-
-Here is a video showing a bunch of weird and interesting properties of e. 
+This makes calculations involving the derivative much simpler, which is why it is favored as a base for logarithmic functions. E will also come up in the study of statistics, specifically in Bernoulli trial processes (go figure). 
 
 The constant e is used to plot something known as the logarithmic spiral in a polar co-ordinate system. The size of the spiral increases but its shape is unaltered with each successive curve, a property known as self-similarity. 
 
-The logarithimic spiral is ubiquitous in nature. Galaxies take the shape of logarithmic spirals, as do the shells of nautiluses, the nerves of the cornea, the arranement of seeds in a sunflower, the segments of a pine cone, the horns of a ram, the arrangement of hair follicles on the human head,cycones and hurricanes, the unfurling of new fern leaves.......
+The logarithimic spiral is ubiquitous in nature. Galaxies take the shape of logarithmic spirals, as do the shells of nautiluses, the nerves of the cornea, the arranement of seeds in a sunflower, the segments of a pine cone, the horns of a ram, the arrangement of hair follicles on the human head,cycones and hurricanes, the unfurling of new fern leaves.......the list goes on. Here's a video with some more:
 
-E seems to be hard coded into nature itself. Hence..."natural log". I dont know about you but I now kind of have the chills. So did Bernoulli. He was thoroughly fascinated by the logarthmic spiral. He called it "the marvelous spiral", Who wouldnt, once they realized they had stumbled on a pattern so deeply and pervasively etched into the very source code of nature? In fact, he was so obsessed with it that he left instructions for a logarithmic spiral to be carved on his tombstone after he died. 
+https://www.youtube.com/watch?v=b-MZumdfbt8
+
+E seems to be hard coded into nature itself. Hence..."natural log". I dont know about you but I now kind of have the chills. So did Bernoulli. He was thoroughly fascinated by the logarthmic spiral. He called it "the marvelous spiral".Who wouldnt, once they realized they had stumbled on a pattern so deeply and pervasively etched into the very source code of nature? In fact, he was so obsessed with it that he left instructions for a logarithmic spiral to be carved on his tombstone after he died. 
 
 They messed up and carved a regular Archimedean spiral instead. 
 
