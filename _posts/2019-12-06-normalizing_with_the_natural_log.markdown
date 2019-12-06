@@ -75,12 +75,16 @@ What if I decide to charge interest every week? Every day? As Bernouli did the m
 
 That limit happens to be the constant 'e'.
 
-The number e is pervasive in mathematics and nature. One of its most interesting properties is that the derivative of the equation 
+The number e is pervasive in mathematics and nature. It has been described as being "the language of growth". One of its most interesting properties is that the derivative and integral of the equation 
    
 	        x
 y = e
                     x
-is also    e    .
+is also    e    
+
+This makes the constant 'e' fundamental to calculus. The following video describes this in more detail:
+
+https://www.youtube.com/watch?v=AuA2EAgAegE
 
 This makes calculations involving the derivative much simpler, which is why it is favored as a base for logarithmic functions. E will also come up in the study of statistics, specifically in Bernoulli trial processes (go figure). 
 
